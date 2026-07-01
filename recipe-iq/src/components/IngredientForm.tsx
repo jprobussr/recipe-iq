@@ -22,21 +22,21 @@ const IngredientForm = ({ onAddIngredient }: IngredientFormProps) => {
     }
 
     onAddIngredient(trimmedIngredient);
+
     setIngredient('');
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="e.g. Chicken"
-          value={ingredient}
-          onChange={handleIngredientChange}
-        />
-        <button>Add Ingredient</button>
-      </form>
-    </div>
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        placeholder="e.g. Chicken"
+        value={ingredient}
+        onChange={handleIngredientChange}
+      />
+
+      <button>Add Ingredient</button>
+    </form>
   );
 };
 

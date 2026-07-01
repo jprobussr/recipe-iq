@@ -3,6 +3,7 @@ import './App.css';
 import Header from './components/Header';
 import IngredientForm from './components/IngredientForm';
 import IngredientList from './components/IngredientList';
+import RecipeAction from './components/RecipeAction';
 
 type Ingredient = {
   id: number;
@@ -35,6 +36,10 @@ const App = () => {
     });
   };
 
+  const handleGetRecipe = () => {
+    console.log(ingredients);
+  }
+
   return (
     <main className="app">
       <Header />
@@ -47,13 +52,7 @@ const App = () => {
         />
       )}
 
-      {ingredients.length > 0 && (
-        <section className="recipe-action">
-          <h2>Ready for a recipe</h2>
-          <p>Generate a recipe from your ingredient list.</p>
-          <button type="button">Get Recipe</button>
-        </section>
-      )}
+      {ingredients.length > 0 && <RecipeAction onGetRecipe={handleGetRecipe} />}
     </main>
   );
 };
