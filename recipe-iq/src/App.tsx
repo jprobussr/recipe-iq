@@ -13,12 +13,17 @@ const App = () => {
   const [ingredients, setIngredients] = useState<Ingredient[]>([]);
 
   const handleAddIngredient = (ingredientName: string) => {
+    const ingredientExists = ingredients.some((ingredient) => {
+      return ingredient.name.toLowerCase() === ingredientName.toLowerCase();
+    });
+
+    if (ingredientExists) {
+      return;
+    }
+
     setIngredients((prevIngredients) => [
       ...prevIngredients,
-      {
-        id: Date.now(),
-        name: ingredientName,
-      },
+      { id: Date.now(), name: ingredientName },
     ]);
   };
 
@@ -34,7 +39,21 @@ const App = () => {
     <main className="app">
       <Header />
       <IngredientForm onAddIngredient={handleAddIngredient} />
-      <IngredientList ingredients={ingredients} onDeleteIngredient={handleDeleteIngredient} />
+
+      {ingredients.length > 0 && (
+        <IngredientList
+          ingredients={ingredients}
+          onDeleteIngredient={handleDeleteIngredient}
+        />
+      )}
+
+      {ingredients.length > 0 && (
+        <section className="recipe-action">
+          <h2>Ready for a recipe</h2>
+          <p>Generate a recipe from your ingredient list.</p>
+          <button type="button">Get Recipe</button>
+        </section>
+      )}
     </main>
   );
 };

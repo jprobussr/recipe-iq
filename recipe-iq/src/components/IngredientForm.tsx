@@ -15,7 +15,13 @@ const IngredientForm = ({ onAddIngredient }: IngredientFormProps) => {
   const handleSubmit = (event: SubmitEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    onAddIngredient(ingredient);
+    const trimmedIngredient = ingredient.trim();
+
+    if (!trimmedIngredient) {
+      return;
+    }
+
+    onAddIngredient(trimmedIngredient);
     setIngredient('');
   };
 
